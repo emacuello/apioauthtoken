@@ -36,11 +36,12 @@ app.get('/getAccessToken', async (req, res) => {
 		if (auth !== REFRESH_TOKEN) {
 			return res.status(401).json({ error: 'Invalid token' });
 		}
-		const { token } = await oauth2Client.getAccessToken();
-		console.log(token);
+		console.log('valid token');
+		const response = await oauth2Client.getAccessToken();
+		console.log(response);
 		res.json({ accessToken: token });
 	} catch (error) {
-		res.status(500).json({ error: 'Failed to get access token' });
+		res.status(500).json({ error: error });
 	}
 });
 
